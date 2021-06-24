@@ -34,7 +34,7 @@ pipeline {
       steps {
         node('Slave1') {
           script {
-            def issue = jiraGetIssue(idOrKey: '${params.JIRA_ID}', site: 'Jira_Stage')
+            def issue = jiraGetIssue(idOrKey: "${params.JIRA_ID}", site: 'Jira_Stage')
             echo issue.data.toString()
           }
         }
@@ -45,7 +45,7 @@ pipeline {
       steps {
         node('Slave1') {
           script {
-            def attachment = jiraGetAttachmentInfo(site: 'Jira_Stage', id: '${params.ATTACH_ID}')
+            def attachment = jiraGetAttachmentInfo(site: 'Jira_Stage', id: "${params.ATTACH_ID}")
             echo attachment.data.toString()
           }
         }
@@ -56,7 +56,7 @@ pipeline {
       steps {
         node('Slave1') {
           script {
-            def attachment1 = jiraUploadAttachment(idOrKey: '${params.JIRA_ID}', file: '${params.FILE_NAME}', site: 'Jira_Stage')
+            def attachment1 = jiraUploadAttachment(idOrKey: "${params.JIRA_ID}", file: "${params.FILE_NAME}", site: 'Jira_Stage')
             echo attachment1.data.toString()
           }
         }
