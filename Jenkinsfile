@@ -1,9 +1,5 @@
-pipeline {
-  agent {
-    node {
-      label 'Slave1'
-    }
-  parameters (
+properties([  
+  parameters ([
     string(
         defaultValue: '', description: '', name: 'JIRA_ID', trim: true
       ),
@@ -13,7 +9,14 @@ pipeline {
       string(
         defaultValue: '', description: '', name: 'FILE_NAME', trim: true
       )
-  )
+  ])
+])
+
+pipeline {
+  agent {
+    node {
+      label 'Slave1'
+    }
   }      
   stages {
     stage('Get_Jira_Issue') {
