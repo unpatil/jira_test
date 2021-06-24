@@ -1,13 +1,13 @@
 properties([  
   parameters ([
     string(
-        defaultValue: '', description: '', name: 'JIRA_ID', trim: true
+        defaultValue: '', description: '', name: 'JIRA_ID'
       ),
       string(
-        defaultValue: '', description: '', name: 'ATTACH_ID', trim: true
+        defaultValue: '', description: '', name: 'ATTACH_ID'
       ),
       string(
-        defaultValue: '', description: '', name: 'FILE_NAME', trim: true
+        defaultValue: '', description: '', name: 'FILE_NAME'
       )
   ])
 ])
@@ -23,7 +23,7 @@ pipeline {
       steps {
         node('Slave1') {
           script {
-            def issue = jiraGetIssue(idOrKey: '${env.JIRA_ID}', site: 'Jira_Stage')
+            def issue = jiraGetIssue(idOrKey: '${JIRA_ID}', site: 'Jira_Stage')
             echo issue.data.toString()
           }
         }
@@ -34,7 +34,7 @@ pipeline {
       steps {
         node('Slave1') {
           script {
-            def attachment = jiraGetAttachmentInfo(site: 'Jira_Stage', id: '${env.ATTACH_ID}')
+            def attachment = jiraGetAttachmentInfo(site: 'Jira_Stage', id: '${ATTACH_ID}')
             echo attachment.data.toString()
           }
         }
@@ -45,7 +45,7 @@ pipeline {
       steps {
         node('Slave1') {
           script {
-            def attachment1 = jiraUploadAttachment(idOrKey: '${env.JIRA_ID}', file: '${env.FILE_NAME}', site: 'Jira_Stage')
+            def attachment1 = jiraUploadAttachment(idOrKey: '${JIRA_ID}', file: '${FILE_NAME}', site: 'Jira_Stage')
             echo attachment1.data.toString()
           }
         }
