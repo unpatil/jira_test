@@ -8,19 +8,22 @@ pipeline {
   stages {
     stage('Get_Jira_Issue') {
       steps {
-        jiraGetIssue(idOrKey: 'TESTPROJ-575', site: 'Jira_Stage')
+        def issue = jiraGetIssue(idOrKey: 'TESTPROJ-575', site: 'Jira_Stage')
+        echo issue.data.toString()
       }
     }
 
     stage('Get_Attachment_Details') {
       steps {
-        jiraGetAttachmentInfo(site: 'Jira_Stage', id: 'TESTPROJ-575')
+         def attachment = jiraGetAttachmentInfo(site: 'Jira_Stage', id: '1299634')
+        echo attachment.data.toString()
       }
     }
-
+    
     stage('Upload_Attachment') {
       steps {
-        jiraUploadAttachment(idOrKey: 'TESTPROJ-575', file: 'test.txt', site: 'Jira_Stage')
+        def attachment1 = jiraUploadAttachment(idOrKey: 'TESTPROJ-575', file: 'test.txt', site: 'Jira_Stage')
+        echo attachment1.data.toString()
       }
     }
 
