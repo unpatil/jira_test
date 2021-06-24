@@ -3,8 +3,8 @@ pipeline {
     node {
       label 'Slave1'
     }
-  parameters {
-      string(
+  parameters (
+    string(
         defaultValue: '', description: '', name: 'JIRA_ID', trim: true
       ),
       string(
@@ -13,8 +13,7 @@ pipeline {
       string(
         defaultValue: '', description: '', name: 'FILE_NAME', trim: true
       )
-    }
-  }
+  )      
   stages {
     stage('Get_Jira_Issue') {
       steps {
