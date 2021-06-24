@@ -13,7 +13,8 @@ pipeline {
       string(
         defaultValue: '', description: '', name: 'FILE_NAME', trim: true
       )
-  )      
+  )
+  }      
   stages {
     stage('Get_Jira_Issue') {
       steps {
@@ -49,5 +50,4 @@ pipeline {
     }
 
   }
-}
 }
