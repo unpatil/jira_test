@@ -18,17 +18,17 @@ pipeline {
       label 'Slave1'
     }
   }
-  parameters ([
+  parameters {
     string(
         defaultValue: '', description: '', name: 'JIRA_ID'
-      ),
+      )
       string(
         defaultValue: '', description: '', name: 'ATTACH_ID'
-      ),
+      )
       string(
         defaultValue: '', description: '', name: 'FILE_NAME'
       )
-  ])      
+  }     
   stages {
     stage('Get_Jira_Issue') {
       steps {
