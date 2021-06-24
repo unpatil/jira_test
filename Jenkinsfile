@@ -3,14 +3,24 @@ pipeline {
     node {
       label 'Slave1'
     }
-
+  parameters {
+      string(
+        defaultValue: '', description: '', name: 'JIRA_ID', trim: true
+      ),
+      string(
+        defaultValue: '', description: '', name: 'ATTACH_ID', trim: true
+      ),
+      string(
+        defaultValue: '', description: '', name: 'FILE_NAME', trim: true
+      )
+    }
   }
   stages {
     stage('Get_Jira_Issue') {
       steps {
         node('Slave1') {
           script {
-            def issue = jiraGetIssue(idOrKey: 'TESTPROJ-575', site: 'Jira_Stage')
+            def issue = jiraGetIssue(idOrKey: '${params.JIRA_ID}', site: 'Jira_Stage')
             echo issue.data.toString()
           }
         }
@@ -21,7 +31,7 @@ pipeline {
       steps {
         node('Slave1') {
           script {
-            def attachment = jiraGetAttachmentInfo(site: 'Jira_Stage', id: '1299634')
+            def attachment = jiraGetAttachmentInfo(site: 'Jira_Stage', id: '${params.ATTACH_ID}')
             echo attachment.data.toString()
           }
         }
@@ -32,7 +42,7 @@ pipeline {
       steps {
         node('Slave1') {
           script {
-            def attachment1 = jiraUploadAttachment(idOrKey: 'TESTPROJ-575', file: 'test.txt', site: 'Jira_Stage')
+            def attachment1 = jiraUploadAttachment(idOrKey: '${params.JIRA_ID}', file: '${params.FILE_NAME}', site: 'Jira_Stage')
             echo attachment1.data.toString()
           }
         }
